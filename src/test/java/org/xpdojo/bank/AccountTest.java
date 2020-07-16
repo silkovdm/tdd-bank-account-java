@@ -8,12 +8,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class AccountTest {
 
     @Test
+    public void balanceOfNewAccount() {
+        Account account = new Account();
+        assertEquals(0, account.balance());
+    }
+
+    @Test
     public void depositAnAmountToIncreaseTheBalance() {
         Account account = new Account();
-        assertEquals(0, account.getBalance());
 
         account.deposit(10);
-        assertEquals(10, account.getBalance());
+        assertEquals(10, account.balance());
     }
 
     @Test
@@ -22,7 +27,16 @@ public class AccountTest {
         account.deposit(10);
         account.withdraw(9);
 
-        assertEquals(1, account.getBalance());
+        assertEquals(1, account.balance());
+    }
+
+    @Test
+    public void withdrawAnAmountToDecreaseTheBalanceToZero() {
+        Account account = new Account();
+        account.deposit(10);
+        account.withdraw(10);
+
+        assertEquals(0, account.balance());
     }
 
     @Test
@@ -41,8 +55,8 @@ public class AccountTest {
         account1.deposit(10);
         account1.transfer(8, account2);
 
-        assertEquals(2, account1.getBalance());
-        assertEquals(8, account2.getBalance());
+        assertEquals(2, account1.balance());
+        assertEquals(8, account2.balance());
     }
 
     @Test

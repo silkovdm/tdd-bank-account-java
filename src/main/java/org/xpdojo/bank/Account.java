@@ -1,7 +1,5 @@
 package org.xpdojo.bank;
 
-import javax.management.relation.RoleUnresolved;
-
 public class Account {
 
     private int balance = 0;
@@ -10,24 +8,22 @@ public class Account {
         this.balance += amount;
     }
 
-    public int getBalance() {
+    public int balance() {
         return balance;
     }
 
     public void withdraw(int amount) {
-        if (balance - amount > 0) {
-            this.balance -= amount;
-        } else {
+        if (balance - amount < 0) {
             throw new RuntimeException("Balance " + balance + "is insufficient to withdraw " + amount);
         }
+        this.balance -= amount;
     }
 
     public void transfer(int amount, Account accountTo) {
-        if (balance - amount > 0) {
-            this.withdraw(amount);
-            accountTo.deposit(amount);
-        } else {
+        if (balance - amount < 0) {
             throw new RuntimeException("Balance " + balance + "is insufficient to transfer " + amount);
         }
+        this.withdraw(amount);
+        accountTo.deposit(amount);
     }
 }
