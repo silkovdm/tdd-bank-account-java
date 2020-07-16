@@ -55,7 +55,6 @@ public class AccountTest {
 
     @Test
     public void withdrawNegativeAmount() {
-
         Assertions.assertThrows(RuntimeException.class, () -> new Account().withdraw(-10));
     }
 
