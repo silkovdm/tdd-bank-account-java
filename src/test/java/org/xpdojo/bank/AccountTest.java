@@ -9,8 +9,12 @@ public class AccountTest {
 
     @Test
     public void balanceOfNewAccount() {
-        Account account = new Account();
-        assertEquals(0, account.balance());
+        assertEquals(0, new Account().balance());
+    }
+
+    @Test
+    public void createNewAccountWithAmount() {
+        assertEquals(10, new Account(10).balance());
     }
 
     @Test
@@ -19,6 +23,11 @@ public class AccountTest {
 
         account.deposit(10);
         assertEquals(10, account.balance());
+    }
+
+    @Test
+    public void depositNegativeAmount() {
+        Assertions.assertThrows(RuntimeException.class, () -> new Account().deposit(-10));
     }
 
     @Test
@@ -41,10 +50,13 @@ public class AccountTest {
 
     @Test
     public void withdrawAnAmountMoreThanBalance() {
-        Assertions.assertThrows(RuntimeException.class, () -> {
-            Account account = new Account();
-            account.withdraw(10);
-        });
+        Assertions.assertThrows(RuntimeException.class, () -> new Account().withdraw(10));
+    }
+
+    @Test
+    public void withdrawNegativeAmount() {
+
+        Assertions.assertThrows(RuntimeException.class, () -> new Account().withdraw(-10));
     }
 
     @Test

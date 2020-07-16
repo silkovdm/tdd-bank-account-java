@@ -4,7 +4,17 @@ public class Account {
 
     private int balance = 0;
 
+    public Account() {
+    }
+
+    public Account(int amount) {
+        this.balance = amount;
+    }
+
     public void deposit(int amount) {
+        if (amount <= 0) {
+            throw new RuntimeException("Cannot deposit negative or zero amount");
+        }
         this.balance += amount;
     }
 
@@ -13,6 +23,9 @@ public class Account {
     }
 
     public void withdraw(int amount) {
+        if (amount <= 0) {
+            throw new RuntimeException("Cannot withdraw negative or zero amount");
+        }
         if (balance - amount < 0) {
             throw new RuntimeException("Balance " + balance + "is insufficient to withdraw " + amount);
         }
